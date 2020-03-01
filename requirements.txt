@@ -1,0 +1,5 @@
+slackclient
+Django
+pymongo
+pyyaml
+python-markdown-slack

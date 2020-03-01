@@ -1,0 +1,18 @@
+.table-rank {
+}
+
+.attendance-table {
+    font-size: 10px;
+    text-align: center;
+}
+
+.table-today-attendance {
+    text-align: center;
+}
+
+.table-today-attendance .no-show {
+    font-size: 50px;
+}
+
+.attendance_date {
+}
