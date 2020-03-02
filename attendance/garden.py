@@ -141,7 +141,6 @@ class Garden:
     """
     db 에 수집한 slack 메시지 삭제
     """
-
     def remove_all_slack_messages(self):
         conn = self.connect_mongo()
 
@@ -156,7 +155,6 @@ class Garden:
     특정일의 출석 데이터 불러오기
     @param selected_date
     """
-
     def get_attendance(self, selected_date):
         attend_dict = {}
 
