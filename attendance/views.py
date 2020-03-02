@@ -19,8 +19,6 @@ def index(request):
 def users(request):
     garden = Garden()
     users = garden.get_member()
-    print("=== users ===")
-    print(users)
     return JsonResponse(users, safe=False)
 
 
@@ -70,7 +68,6 @@ def collect(request):
 def get(request, date):
     garden = Garden()
     result = garden.get_attendance(datetime.strptime(date, "%Y%m%d").date())
-    # pprint.pprint(result)
     return JsonResponse(result, safe=False)
 
 

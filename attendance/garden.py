@@ -46,8 +46,6 @@ class Garden:
         return pymongo.MongoClient("mongodb://%s:%s" % (self.mongo_host, self.mongo_port))
 
     def get_member(self):
-        print("=== get_member ===")
-        print(self.users)
         return self.users
 
     def get_gardening_days(self):
@@ -195,7 +193,7 @@ class Garden:
                 message += "@%s " % members[result["user"]]["slack"]
 
         self.slack_client.chat_postMessage(
-            channel='#junekim',  # temp
+            channel='#gardening-for-100days',
             text=message,
             link_names=1
         )
