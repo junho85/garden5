@@ -330,7 +330,7 @@ ${data_row.user}
     function get_attendances() {
         $.ajax({
             method: "GET",
-            url: "gets",
+            url: "api/gets",
             dataType: "JSON",
             data: {}
         }).done(function (data) {
@@ -346,7 +346,7 @@ ${data_row.user}
                 formatted_today: moment().format("YYYY-MM-DD"),
                 yesterday: new Date(new Date().setDate(new Date().getDate()-1)), // 어제
                 formatted_dates: [], // 시작일~어제 까지 YYYY-MM-DD 리스트
-                total_days: 100, // 100일간 진행함
+                total_days: {{ gardening_days }}, // 100일간 진행함
                 progressed_days: 0, // 진행 일수
                 daily_count: {}, // 날짜별 출석 카운트
                 hourly_count: {}, // 시간별 출석 카운트
@@ -355,8 +355,8 @@ ${data_row.user}
                 attendance_count_by_weekdays: {}, // 요일별 출석수
             };
 
-            // 출석부 날짜 범위 2020.03.02 ~ 어제 (단, 마지막 날 까지만)
-            for (let d = context.start_day; d <= context.yesterday; d.setDate(d.getDate() + 1)) {
+            // 출석부 날짜 범위 2020.03.02 ~ 오늘 (단, 마지막 날 까지만)
+            for (let d = context.start_day; d <= context.today; d.setDate(d.getDate() + 1)) {
                 context.formatted_dates.push(moment(d).format("YYYY-MM-DD"));
 
                 if (context.formatted_dates.length >= {{ gardening_days }}) {
@@ -466,6 +466,8 @@ ${data_row.user}
 
             // 시간별 출석수
             draw_attendance_count_by_hours(context);
+
+            console.log(context);
         }).fail(function (data) {
             console.log(data);
             alert("출석부 실패");
