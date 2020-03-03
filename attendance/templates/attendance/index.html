@@ -26,7 +26,7 @@
     function get_users() {
         $.ajax({
             method: "GET",
-            url: "users/",
+            url: "api/users/",
             dataType: "JSON",
             data: {}
         }).done(function (data) {
@@ -467,7 +467,6 @@ ${data_row.user}
             // 시간별 출석수
             draw_attendance_count_by_hours(context);
 
-            console.log(context);
         }).fail(function (data) {
             console.log(data);
             alert("출석부 실패");
