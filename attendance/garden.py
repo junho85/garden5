@@ -90,7 +90,19 @@ class Garden:
             # make attend
             commits = []
             for attachment in message["attachments"]:
-                commits.append(attachment["text"])
+                try:
+                    # commit has text field
+                    # there is no text field in pull request, etc...
+                    commits.append(attachment["text"])
+                except Exception as err:
+                    print(message["attachments"])
+                    print(err)
+                    continue
+
+            # skip - if there is no commits
+            if len(commits) == 0:
+                continue
+
             # ts_datetime = datetime.fromtimestamp(float(message["ts"]))
             ts_datetime = message["ts_for_db"]
             attend = {"ts": ts_datetime, "message": commits}
@@ -184,7 +196,7 @@ class Garden:
         members = self.get_members()
         today = datetime.today().date()
 
-        message = "미출석자 알람 테스트 "
+        message = "[미출석자 알람]\n"
         results = self.get_attendance(today)
         for result in results:
             if result["first_ts"] is None:
