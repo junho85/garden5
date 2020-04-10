@@ -45,6 +45,11 @@ class Garden:
     def connect_mongo(self):
         return pymongo.MongoClient("mongodb://%s:%s" % (self.mongo_host, self.mongo_port))
 
+    def get_database(self):
+        conn = self.connect_mongo()
+
+        return conn.get_database(self.mongo_database)
+
     def get_member(self):
         return self.users
 
@@ -156,9 +161,7 @@ class Garden:
     def remove_all_slack_messages(self):
         conn = self.connect_mongo()
 
-        mongo_database = self.mongo_database
-
-        db = conn.get_database(mongo_database)
+        db = conn.get_database(self.mongo_database)
 
         mongo_collection = db.get_collection(self.mongo_collection_slack_message)
         mongo_collection.remove()
