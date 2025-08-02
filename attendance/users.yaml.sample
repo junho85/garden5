@@ -1,0 +1,28 @@
+# users.yaml.sample
+# 실제 사용을 위해 이 파일을 users.yaml로 복사하고 실제 사용자 정보로 수정하세요
+# GitHub 사용자명과 Slack 사용자명을 매핑합니다
+
+# 샘플 사용자들
+user1:
+  slack: slack_username1
+
+user2:
+  slack: slack_username2
+
+user3:
+  slack: slack_username3
+
+# 실제 사용 예시:
+# junho85:
+#   slack: junho85
+# 
+# genie-youn:
+#   slack: yjs930915
+#
+# chloeeekim:
+#   slack: chloe.kim
+
+# 주의사항:
+# - GitHub 사용자명은 대소문자를 구분합니다
+# - Slack 사용자명은 @를 제외한 실제 사용자명을 입력하세요
+# - YAML 형식을 정확히 맞춰주세요 (들여쓰기 2칸)

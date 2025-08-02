@@ -4,7 +4,24 @@ from datetime import datetime, timedelta
 from .garden import Garden
 import pprint
 import markdown
+import re
 from .markdown_slack_extension import SlackMarkdownExtension
+
+
+def process_slack_links(text):
+    """
+    Slack 링크 포맷 <url|text>를 HTML 링크로 변환
+    """
+    # <url|text> 패턴을 찾아서 <a href="url">text</a>로 변환
+    pattern = r'<([^|>]+)\|([^>]+)>'
+    def replace_link(match):
+        url = match.group(1)
+        text = match.group(2)
+        # 백틱으로 둘러싸인 텍스트는 <code> 태그로 변환
+        text = re.sub(r'`([^`]+)`', r'<code>\1</code>', text)
+        return f'<a href="{url}">{text}</a>'
+    
+    return re.sub(pattern, replace_link, text)
 
 
 def index(request):

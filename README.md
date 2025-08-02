@@ -26,18 +26,77 @@
    pip install -r requirements.txt
    ```
 
-3. **Django 마이그레이션**
+3. **설정 파일 생성**
+   ```bash
+   # config.ini 설정
+   cp attendance/config.ini.sample attendance/config.ini
+   
+   # users.yaml 설정
+   cp attendance/users.yaml.sample attendance/users.yaml
+   ```
+
+4. **설정 파일 수정**
+   - `attendance/config.ini`: Slack API 토큰, 채널 ID 등 설정
+   - `attendance/users.yaml`: GitHub 사용자명과 Slack 사용자명 매핑
+
+5. **Django 마이그레이션**
    ```bash
    python manage.py migrate
    ```
 
-4. **개발 서버 실행**
+6. **개발 서버 실행**
    ```bash
    python manage.py runserver
    ```
 
-5. **브라우저에서 확인**
+7. **브라우저에서 확인**
    - http://localhost:8000 접속
+
+### 설정 파일 상세 설명
+
+#### config.ini 설정
+```ini
+[DEFAULT]
+SLACK_API_TOKEN = xoxb-your-slack-bot-token-here  # Slack Bot Token
+CHANNEL_ID = CXXXXXXXXX                           # GitHub 커밋 채널 ID
+START_DATE = 2020-03-02                          # 출석 시작 날짜
+GARDENING_DAYS = 100                             # 활동 기간(일)
+
+[MONGO]
+DATABASE = garden5
+HOST = localhost
+PORT = 27017
+
+[POSTGRESQL]  # Supabase 마이그레이션용 (선택사항)
+DATABASE = postgres
+HOST = your-supabase-host.pooler.supabase.com
+PORT = 6543
+USER = postgres.your-project-id
+PASSWORD = your-password
+SCHEMA = garden5
+```
+
+#### users.yaml 설정
+```yaml
+# GitHub 사용자명과 Slack 사용자명 매핑
+junho85:
+  slack: junho85
+
+genie-youn:
+  slack: yjs930915
+
+chloeeekim:
+  slack: chloe.kim
+```
+
+#### Slack API 토큰 발급 방법
+1. [Slack API 페이지](https://api.slack.com/apps) 방문
+2. "Create New App" > "From scratch" 선택
+3. OAuth & Permissions에서 다음 권한 추가:
+   - `channels:history` (채널 메시지 읽기)
+   - `chat:write` (메시지 보내기)
+   - `users:read` (사용자 정보 읽기)
+4. "Bot User OAuth Token" 복사하여 config.ini에 설정
 
 ### 주요 변경사항 (Python 3.11 업그레이드)
 - Python 3.7.5 → 3.11.11
@@ -46,4 +105,4 @@
 - python-markdown-slack → 커스텀 Slack 마크다운 확장
 
 ## 참고
-* [github](https://github.com/junho85/garden4)
+* [github](https://github.com/junho85/garden5)

@@ -9,3 +9,4 @@ psycopg2-binary>=2.9
 supabase>=2.0.0
 python-dotenv>=1.0.0
 aiohttp>=3.8.0  # slack-sdk RTM 의존성
+pytz>=2023.3  # timezone 처리용
