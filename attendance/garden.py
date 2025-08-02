@@ -1,6 +1,6 @@
 import configparser
 from datetime import date, timedelta, datetime
-import slack
+from slack_sdk import WebClient
 import pymongo
 import pprint
 import os
@@ -15,7 +15,7 @@ class Garden:
         config.read(path)
 
         slack_api_token = config['DEFAULT']['SLACK_API_TOKEN']
-        self.slack_client = slack.WebClient(token=slack_api_token)
+        self.slack_client = WebClient(token=slack_api_token)
 
         self.channel_id = config['DEFAULT']['CHANNEL_ID']
 
@@ -133,11 +133,11 @@ class Garden:
     # github 봇으로 모은 slack message 들을 slack_messages collection 에 저장
     def collect_slack_messages(self, oldest, latest):
 
-        response = self.slack_client.channels_history(
+        response = self.slack_client.conversations_history(
             channel=self.channel_id,
             latest=str(latest),
             oldest=str(oldest),
-            count=1000
+            limit=1000
         )
 
         conn = self.connect_mongo()

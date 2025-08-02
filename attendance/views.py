@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 from .garden import Garden
 import pprint
 import markdown
-from python_markdown_slack import PythonMarkdownSlack
+from .markdown_slack_extension import SlackMarkdownExtension
 
 
 def index(request):
@@ -46,7 +46,7 @@ def user_api(request, user):
     output = []
     for (date, commits) in result.items():
         for commit in commits:
-            commit["message"][0] = markdown.markdown(commit["message"][0], extensions=[PythonMarkdownSlack()])
+            commit["message"][0] = markdown.markdown(commit["message"][0], extensions=[SlackMarkdownExtension()])
             # commit["message"][0] = "<br>".join(commit["message"][0].split("\n"))
         output.append({"date": date, "commits": commits})
 
