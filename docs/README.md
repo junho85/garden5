@@ -7,9 +7,8 @@
 ## Slack API Token 발급
 [Legacy tokens](https://api.slack.com/custom-integrations/legacy-tokens) 에서 Token 을 발급 받습니다.
 
-## 01.mongodb
-Slack API 이용해서 commit push 메시지들을 수집합니다. mongodb 를 이용합니다.  
-자세한 내용은 [01.mongodb](01.mongodb.md) 을 참고합니다.
+## 01.데이터베이스
+Slack API 이용해서 commit push 메시지들을 수집합니다. PostgreSQL/Supabase 를 이용합니다.
 
 ## 02.설정. config.ini, users.yaml
 config.ini 에 slack api token, db 설정 등을 해줍니다.

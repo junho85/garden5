@@ -77,8 +77,8 @@ build-and-push.sh
 
 # Configuration samples
 *.sample
-config.ini
-users.yaml
+attendance/config.ini
+attendance/users.yaml
 
 # Temporary files
 tmp/
